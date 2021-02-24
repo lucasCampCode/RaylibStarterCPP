@@ -41,7 +41,20 @@ unsigned int ElfHash(unsigned char* data)
 }
 unsigned int Hash(unsigned char* data) 
 {
+    //initilizes new hash,incrementer, and value for a ascii value
     unsigned int hash = 0;
+    unsigned int j = 1;
+    unsigned int newValue = 0;
+    for (unsigned char* i = data; *i != '\0'; ++i)
+    {
+        //makes new value based on the position of the ascii value
+        newValue = j * *i;
+        //bit shift the old hash value with the new ascii value;
+        hash = (hash << 4) + newValue;
+        //increments hash;
+        j++;
+    }
+    //returns a hash value;
     return (hash & 0x7FFFFFFF);
 }
 
