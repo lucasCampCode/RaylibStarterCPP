@@ -41,19 +41,7 @@ unsigned int ElfHash(unsigned char* data)
 }
 unsigned int Hash(unsigned char* data) 
 {
-    unsigned int hash = 0, x = 0;
-    for (unsigned char* i = data; *i != '\0'; ++i)
-    {
-        hash = (hash * 6865) + *i;
-        hash = (hash << 4);
-
-        if ((x = hash & 0xF0000000L) != 0)
-        {
-            hash ^= (x >> 24);
-            hash &= ~x;
-        }
-    }
-
+    unsigned int hash = 0;
     return (hash & 0x7FFFFFFF);
 }
 
@@ -78,7 +66,7 @@ int main(int argc, char* argv[])
         // Update
         //----------------------------------------------------------------------------------
         std::cin >> input;
-        checkSum = ElfHash(input);
+        checkSum = Hash(input);
         //----------------------------------------------------------------------------------
         
         // Draw
